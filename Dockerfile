@@ -1,6 +1,8 @@
 # Alpine linux would be great for this, but it's DNS does not use search paths.
 FROM progrium/busybox
-MAINTAINER Tim Hockin "thockin@google.com"
+LABEL maintainer="imran.qureshi@healthcatalyst.com"
+
+# based on: # https://github.com/kubernetes/contrib/tree/master/for-demos/proxy-to-service
 
 RUN opkg-install socat
 ADD start.sh start.sh

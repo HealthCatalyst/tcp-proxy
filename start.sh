@@ -26,10 +26,17 @@ if [[ -z "$1" -o -z "$2" -o -z "$3" ]]; then
     exit 1
 fi
 
+echo "Version 2018.02.16.01"
+
 PROTO=$(echo $1 | tr a-z A-Z)
 TIMEOUT=""
 test -n "$4" && TIMEOUT="-T$4"
 
-CMD="socat -v -d -d ${TIMEOUT} ${PROTO}-LISTEN:$2,reuseaddr,fork ${PROTO}:$3:$2"
+if [[ ! -z "$VERBOSE_LEVEL" ]]; then
+    CMD="socat -v -d -d ${TIMEOUT} ${PROTO}-LISTEN:$2,reuseaddr,fork ${PROTO}:$3:$2"
+else
+    CMD="socat -d ${TIMEOUT} ${PROTO}-LISTEN:$2,reuseaddr,fork ${PROTO}:$3:$2"
+fi
+
 echo "Running ${CMD}"
 exec ${CMD}
