@@ -5,5 +5,7 @@ MAINTAINER Tim Hockin "thockin@google.com"
 RUN opkg-install socat
 ADD start.sh start.sh
 
+RUN chmod a+x ./start.sh
+
 # Usage: docker run -p <host-port>:<port> <this-container> <tcp|udp> <port> <service-name> [timeout]
 ENTRYPOINT ["/start.sh"]
